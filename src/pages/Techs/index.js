@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   Container,
@@ -12,10 +12,27 @@ import {
   ProfileButton
 } from './styles';
 
+import api from '../../services/api';
+
 export default function App() {
   const [loading, setLoading] = useState(false);
   const [techs, setTechs] = useState([]);
-  const [newTech, setNewTech] = useState([]);
+  const [newTech, setNewTech] = useState(null);
+
+  async function handleAddTech(){
+    setLoading(true);
+
+    const { data } = await api.post(`/techs/`,{
+      id: newTech,
+    });
+
+
+    setTechs([...newTech, data]);
+    setLoading(false);
+
+    setNewTech(null);
+    Keyboard.dismiss();
+  }
 
   return (
     <Container>
@@ -29,7 +46,7 @@ export default function App() {
           returnKeyType="send"
           onSubmitEditing={() => {}}
         />
-        <SubmitButton loading={loading} onPress={() => {}}>
+        <SubmitButton loading={loading} onPress={handleAddTech}>
           {loading ? (
             <ActivityIndicator color="#fff" />
           ): (
@@ -37,6 +54,23 @@ export default function App() {
           )}
         </SubmitButton>
       </Form>
+      <List
+        data={techs}
+        keyExtractor={(tech) => tech.id}
+        renderItem={({ item }) => (
+          <Tech>
+            <Name>{item.id}</Name>
+
+            <ProfileButton background="#ffc107" onPress={() => {}}>
+              <Icon name="design-services" size={20} color="#fff" />
+            </ProfileButton>
+
+            <ProfileButton background="#e0a800" onPress={() => {}}>
+              <Icon name="delete" size={20} color="#fff" />
+            </ProfileButton>
+          </Tech>
+        )}
+      />
     </Container>
   );
 }
