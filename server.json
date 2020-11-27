@@ -1,1 +1,5 @@
-{ "techs": [] }
+{ "techs": [
+  {
+    "id": "Node.js"
+  }
+] }

@@ -42,7 +42,7 @@ export const List = styled.FlatList.attrs({
 
 export const Tech = styled.View`
   border-color: #eee;
-  border-bottom: 1px;
+
   border-radius: 4px;
   flex-direction: row;
   padding-bottom: 20px;

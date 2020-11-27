@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, Keyboard } from 'react-native';
+import { ActivityIndicator, Keyboard, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   Container,
@@ -19,19 +19,25 @@ export default function App() {
   const [techs, setTechs] = useState([]);
   const [newTech, setNewTech] = useState(null);
 
-  async function handleAddTech(){
+  async function handleAddTech() {
     setLoading(true);
 
-    const { data } = await api.post(`/techs/`,{
+    const { data } = await api.post('/techs/', {
       id: newTech,
     });
 
-
-    setTechs([...newTech, data]);
+    setTechs([...techs, data]);
     setLoading(false);
 
     setNewTech(null);
     Keyboard.dismiss();
+
+  }
+
+  async function handleDeleteTech(id) {
+    await api.delete(`/techs/${id}`);
+    const filteredTechs = techs.filter((item) => item.id !== id);
+    setTechs(filteredTechs);
   }
 
   return (
@@ -42,14 +48,14 @@ export default function App() {
           autoCapitalize="none"
           placeholder="Adicionar Tecnologia"
           value={newTech}
-          onChange={setNewTech}
+          onChangeText={setNewTech}
           returnKeyType="send"
-          onSubmitEditing={() => {}}
+          onSubmitEditing={handleAddTech}
         />
         <SubmitButton loading={loading} onPress={handleAddTech}>
           {loading ? (
             <ActivityIndicator color="#fff" />
-          ): (
+          ) : (
             <Icon name="add" size={20} color="#fff" />
           )}
         </SubmitButton>
@@ -65,7 +71,10 @@ export default function App() {
               <Icon name="design-services" size={20} color="#fff" />
             </ProfileButton>
 
-            <ProfileButton background="#e0a800" onPress={() => {}}>
+            <ProfileButton
+              background="#e0a800"
+              onPress={() => handleDeleteTech(item.id)}
+            >
               <Icon name="delete" size={20} color="#fff" />
             </ProfileButton>
           </Tech>
