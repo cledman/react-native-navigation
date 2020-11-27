@@ -4,10 +4,11 @@ Resturants Finder is the project from a course from [Digital Innovation One](htt
 
 
 <p align="center">
-    <img src=".github/preview.gif" width="600/>
+    <img src=".github/preview.gif" width="300"/>
 </p>
 
 ---
+
 
 # Guide
 
@@ -16,6 +17,7 @@ Resturants Finder is the project from a course from [Digital Innovation One](htt
 * [Using](#using)
 * [Technologies](#technologies)
 * [Future Implementations](#future-implementations)
+
 
 
 # Features
@@ -53,6 +55,10 @@ On IOS:
 
 ```yarn ios```
 
+Open another terminal and start the server. But first, create a server.json file
+
+```json-server --host 192.168.x.xx server.json```
+
 # Technologies
 
 * [NodeJS](https://nodejs.org/en/) to handle the server,
@@ -60,6 +66,7 @@ On IOS:
 * [React Native](https://reactnative.dev/) to handle the rendering,
 * [Styled Components](https://www.styled-components.com/) to handle components and styles,
 * [Material](https://material-ui.com/pt/) to handle the styles too,
+* [Json Server ](https://github.com/typicode/json-server) for a fake api.
 
 
 
