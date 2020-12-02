@@ -1,6 +1,6 @@
 # Techs
 
-Resturants Finder is the project from a course from [Digital Innovation One](https://digitalinnovation.one/) and it´s made with [React Native](https://reactnative.dev/).
+Techs is the project from a course from [Digital Innovation One](https://digitalinnovation.one/) and it´s made with [React Native](https://reactnative.dev/).
 
 
 <p align="center">
@@ -55,7 +55,7 @@ On IOS:
 
 ```yarn ios```
 
-Open another terminal and start the server. But first, create a server.json file
+Open another terminal and start the server. But first, create a server.json file (or use the one provided).
 
 ```json-server --host 192.168.x.xx server.json```
 
